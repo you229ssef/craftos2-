@@ -22,6 +22,7 @@
 #include "../peripheral/printer.hpp"
 #include "../peripheral/speaker.hpp"
 #include "../peripheral/tank.hpp"
+#include "../peripheral/advanced.hpp"
 #include "../runtime.hpp"
 #include "../util.hpp"
 
@@ -41,6 +42,23 @@ static std::unordered_map<std::string, peripheral_init_fn> initializers = {
     {"speaker", peripheral_init_fn(speaker::init)}
 #endif
 };
+
+static const char *advanced_types[] = {
+    "chat_box", "player_detector", "environment_detector", "geo_scanner",
+    "block_reader", "inventory_manager", "redstone_integrator", "rs_bridge", "me_bridge"
+};
+
+static void registerAdvancedPeripherals() {
+    for (const char *type : advanced_types) {
+        initializers[type] = [type](lua_State *L, const char *side) {
+            return advanced_peripheral::init(L, side, type);
+        };
+    }
+}
+
+struct advanced_peripheral_registration {
+    advanced_peripheral_registration() { registerAdvancedPeripherals(); }
+} advanced_peripheral_registration_instance;
 
 void registerPeripheral(const std::string& name, const peripheral_init_fn& initializer) {
     initializers[name] = initializer;

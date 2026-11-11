@@ -33,6 +33,26 @@ Creates and removes peripherals from the registry.
   * Returns: `true` on success, `false` on failure (already removed)
 * *table* names(): Returns a list of available peripherals.
 
+### Advanced Peripherals compatibility
+CraftOS-PC includes virtual compatibility peripherals for scripts which target
+Advanced Peripherals. They can be attached with `periphemu.create`, for example:
+
+```lua
+periphemu.create("left", "chat_box")
+periphemu.create("right", "player_detector")
+periphemu.create(42, "computer")
+```
+
+The supported virtual types are `chat_box`, `player_detector`,
+`environment_detector`, `geo_scanner`, `block_reader`, `inventory_manager`,
+`redstone_integrator`, `rs_bridge`, and `me_bridge`. These peripherals return
+safe empty or default data because CraftOS-PC is not connected to a Minecraft
+world; a live-world bridge can be added later without changing the Lua
+peripheral names.
+
+Computer IDs are supported directly. Start a computer with `craftos --id 42`,
+or create and attach one from Lua with `periphemu.create(42, "computer")`.
+
 ## `drive` peripheral
 Floppy drive emulator that supports loading mounts (see mounter API), floppy disks (by ID), and audio files.
 See [disk API](computercraft.info/wiki/Disk_(API)) for other functions.

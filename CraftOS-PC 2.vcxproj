@@ -653,6 +653,7 @@
     <ClInclude Include="src\peripheral\printer.hpp" />
     <ClInclude Include="src\peripheral\speaker.hpp" />
     <ClInclude Include="src\peripheral\tank.hpp" />
+    <ClInclude Include="src\peripheral\advanced.hpp" />
     <ClInclude Include="src\platform.hpp" />
     <ClInclude Include="src\platform\resource.h" />
     <ClInclude Include="src\termsupport.hpp" />
@@ -733,6 +734,7 @@
       </MinimalRebuild>
     </ClCompile>
     <ClCompile Include="src\peripheral\tank.cpp" />
+    <ClCompile Include="src\peripheral\advanced.cpp" />
     <ClCompile Include="src\platform.cpp" />
     <ClCompile Include="src\platform\darwin.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
